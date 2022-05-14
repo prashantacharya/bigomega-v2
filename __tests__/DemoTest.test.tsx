@@ -6,6 +6,6 @@ describe('Home', () => {
   it('renders a heading', () => {
     render(<Test />);
 
-    expect(screen.getByText('Hello Prashant')).toBeInTheDocument();
+    expect(screen.getByText('Hello World')).toBeInTheDocument();
   });
 });

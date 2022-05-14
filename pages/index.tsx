@@ -1,12 +1,22 @@
+import ThemeProvider from '../context/ThemeProvider';
+import ThemeSwitch from '../components/ThemeSwitch';
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <ThemeProvider>
+      <div className="text-center bg-normal p-4">
+        <h1 className="text-3xl text-primary-darker font-bold">Hello world!</h1>
+        <h1 className="text-3xl text-primary-normal font-bold">Hello world!</h1>
+        <h1 className="text-3xl text-secondary-darker font-bold">
+          Hello world!
+        </h1>
+        <h1 className="text-3xl text-secondary-normal font-bold">
+          Hello world!
+        </h1>
 
-      <h1 className="text-3xl text-red-900 font-bold underline">
-        Hello world!
-      </h1>
-    </div>
+        <ThemeSwitch />
+      </div>
+    </ThemeProvider>
   );
 };
 

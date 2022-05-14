@@ -2,8 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root {
+  --theme-primary: hsl(354, 79%, 60%);
+  --theme-secondary: hsl(37, 100%, 60%);
+  --theme-primary-darker: hsl(354, 79%, 50%);
+  --theme-secondary-darker: hsl(37, 100%, 50%);
+}
+
+.theme-default {
+  --background: hsl(0, 0%, 100%);
+  --section-background: hsl(0, 100%, 98%);
+}
+
+.theme-dark {
+  --background: hsl(195, 46%, 5%);
+  --section-background: hsl(210, 80%, 12%);
 }
