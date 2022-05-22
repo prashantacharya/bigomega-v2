@@ -16,7 +16,7 @@ const HeroSection = () => {
             </p>
           </div>
 
-          <div>
+          <div className="flex align-center justify-center">
             <div className="w-1/2 md:w-auto md:text-left p-1 my-10 md:my-0 flex content-center align-center rounded-full hero-image-bg">
               <Image
                 src="/my-image.png"
