@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --theme-primary: hsl(354, 79%, 60%);
+  --theme-primary: hsl(354, 100%, 67%);
   --theme-secondary: hsl(37, 100%, 60%);
-  --theme-primary-darker: hsl(354, 79%, 50%);
+  --theme-primary-darker: hsl(354, 79%, 57%);
   --theme-secondary-darker: hsl(37, 100%, 50%);
 }
 
@@ -17,4 +19,28 @@
 .theme-dark {
   --background: hsl(195, 46%, 5%);
   --section-background: hsl(210, 80%, 12%);
+}
+
+.title-name {
+  background: linear-gradient(180deg, #fca311 0%, #eb5160 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-default main {
+  background: url('/hero-light-background.svg');
+}
+
+.theme-dark main {
+  background: url('/hero-dark-background.svg');
+}
+
+.theme-default main,
+.theme-dark main {
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero-image-bg {
+  background: linear-gradient(180deg, #fca311 0%, #eb5160 100%);
 }

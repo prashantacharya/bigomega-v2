@@ -31,11 +31,11 @@ const ThemeProvider = (props: ThemeProviderProps) => {
     if (theme === 'default') setAppTheme('dark');
   };
 
-  const appTheme = theme === 'dark' ? 'theme-dark' : 'theme-default';
+  const appTheme = theme === 'dark' ? 'theme-dark dark' : 'theme-default';
 
   return (
     <ThemeContext.Provider value={{ toggleTheme }}>
-      <div className={appTheme}>{props.children}</div>
+      <div className={`${appTheme} bg-primary`}>{props.children}</div>
     </ThemeContext.Provider>
   );
 };

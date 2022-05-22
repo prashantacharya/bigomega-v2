@@ -9,6 +9,7 @@ module.exports = {
         primary: {
           normal: 'var(--theme-primary)',
           darker: 'var(--theme-primary-darker)',
+          background: 'var(--background)',
         },
         secondary: {
           normal: 'var(--theme-secondary)',
@@ -19,7 +20,12 @@ module.exports = {
         normal: 'var(--background)',
         section: 'var(--section-background)',
       },
+
+      fontFamily: {
+        sans: ['montserrat', 'sans-serif'],
+      },
     },
   },
   plugins: [],
+  darkMode: 'class',
 };

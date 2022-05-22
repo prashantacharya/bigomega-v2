@@ -10,10 +10,10 @@ const ThemeSwitch = () => {
 
   return (
     <button
-      className="bg-primary-normal hover:bg-primary-darker ease-in-out duration-300 mt-4 p-4 text-white font-bold rounded"
+      className="bg-primary-normal hover:bg-primary-darker ease-in-out duration-300 mt-4 p-1 text-white text-xs rounded"
       onClick={switchTheme}
     >
-      SWITCH THEME
+      Switch
     </button>
   );
 };
