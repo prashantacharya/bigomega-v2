@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 const HeroSection = () => {
   return (
-    <main className="px-3 py-10">
+    <main className="px-3 py-10 md:py-20">
       <div className="container mx-auto py-20">
         <div className="flex flex-col-reverse md:flex-row justify-between align-center">
           <div className="text-center md:text-left md:flex flex-col justify-center">
