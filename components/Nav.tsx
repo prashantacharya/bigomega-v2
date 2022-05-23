@@ -9,7 +9,7 @@ const Nav = () => {
     <nav className="py-5 px-3">
       <div className="container mx-auto">
         <div className="flex justify-between">
-          <Image src="/logo.svg" height="55" width="200" />
+          <Image src="/logo.svg" height="55" width="200" alt="Big Omega" />
 
           <ul className="items-center hidden md:flex">
             {links.map((link) => (

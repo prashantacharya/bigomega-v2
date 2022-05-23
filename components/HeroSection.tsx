@@ -23,6 +23,7 @@ const HeroSection = () => {
                 height="400"
                 width="400"
                 className="rounded-full text-center"
+                alt="Prashant Acharya"
               />
             </div>
           </div>

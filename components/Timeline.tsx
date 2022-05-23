@@ -25,7 +25,7 @@ const Timeline = () => {
     <section className="bg-section py-10">
       <div className="container mx-auto">
         <h2 className="text-2xl font-bold text-center text-primary-normal uppercase">
-          My Life's Timeline
+          My Life&apos;s Timeline
         </h2>
 
         <ul className="timeline my-10">
