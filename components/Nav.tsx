@@ -3,8 +3,13 @@ import Image from 'next/image';
 import { MenuAlt3Icon } from '@heroicons/react/solid';
 
 import links from '../constants/links';
+import { useRouter } from 'next/router';
 
 const Nav = () => {
+  const router = useRouter();
+  const { pathname } = router;
+  const currentPage = pathname.split('/')[1];
+
   return (
     <nav className="py-5 px-3">
       <div className="container mx-auto">
@@ -15,9 +20,15 @@ const Nav = () => {
             {links.map((link) => (
               <li className="mr-8 last:mr-0" key={link.url}>
                 <Link href={link.url} title={link.title}>
-                  <span className="p-2 text-primary-normal cursor-pointer text-lg border-b-2 border-primary-background hover:text-primary-darker hover:border-b-2 hover:border-secondary-normal transition-colors ease-in-out">
-                    {link.title}
-                  </span>
+                  {link.url === `/${currentPage}` ? (
+                    <span className="p-2 text-primary-normal cursor-pointer text-lg border-b-2 border-primary-background border-b-2 border-secondary-normal transition-colors ease-in-out">
+                      {link.title}
+                    </span>
+                  ) : (
+                    <span className="p-2 text-primary-normal cursor-pointer text-lg border-b-2 border-primary-background hover:text-primary-darker hover:border-b-2 hover:border-secondary-normal transition-colors ease-in-out">
+                      {link.title}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}
