@@ -8,11 +8,11 @@ const BlogPost = (props: any) => {
     <Wrapper>
       <div className="container mx-auto blogs">
         <h1 className="font-bold text-3xl text-black dark:text-white">
-          {post.title}
+          {post?.title}
         </h1>
 
         <div
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: post?.content }}
           className="bg-normal text-black dark:text-white"
         />
       </div>
