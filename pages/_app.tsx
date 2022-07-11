@@ -1,4 +1,6 @@
 import '../styles/globals.css';
+import '../styles/timeline.scss';
+
 import type { AppProps } from 'next/app';
 import ThemeProvider from '../context/ThemeProvider';
 
