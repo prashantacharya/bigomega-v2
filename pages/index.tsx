@@ -8,8 +8,6 @@ import HomePageBlogList from '../components/HomepageBlogList';
 const HomePage = (props: any) => {
   const { blogs } = props;
 
-  console.log(props);
-
   return (
     <div className="bg-normal">
       <Nav />

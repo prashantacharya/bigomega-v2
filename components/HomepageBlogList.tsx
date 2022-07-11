@@ -16,24 +16,22 @@ const HomePageBlogList = (props: IHomePageBlogList) => {
           Blogs
         </h2>
 
-        <div className="my-10 grid gap-10 grid-cols-1 md:grid-cols-3">
+        <div className="my-10 grid content-stretch gap-10 grid-cols-1 md:grid-cols-3">
           {blogs.map((blog: any) => (
-            <div key={blog.id} className="grid-item">
-              <div className="bg-normal dark:bg-section rounded-lg shadow-lg">
-                <div className="flex flex-col">
-                  <div className="flex-1 p-4">
-                    <Link href={`/blogs/${blog.id}`}>
-                      <h3 className="mb-4 text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
-                        {blog.title}
-                      </h3>
-                    </Link>
-                    <p className="text-sm text-secondary-normal font-semibold">
-                      {formattedBlogDate(blog.date)}
-                    </p>
-                    <p className="mt-4 dark:text-white">{blog?.subtitle}</p>
-                  </div>
-                  <div className="flex-1"></div>
-                </div>
+            <div
+              className="bg-normal dark:bg-section rounded-lg shadow-lg"
+              key={blog.id}
+            >
+              <div className="p-4">
+                <Link href={`/blogs/${blog.id}`}>
+                  <h3 className="mb-4 text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
+                    {blog.title}
+                  </h3>
+                </Link>
+                <p className="text-sm text-secondary-normal font-semibold">
+                  {formattedBlogDate(blog.date)}
+                </p>
+                <p className="mt-4 dark:text-white">{blog?.subtitle}</p>
               </div>
             </div>
           ))}
