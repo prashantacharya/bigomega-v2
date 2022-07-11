@@ -9,28 +9,30 @@ const data = [
   {
     date: 'March, 1998',
     title: 'Born in Kathmandu, Nepal',
-    description: 'I was born in the heart of the capital city in Nepal',
+    description:
+      'I was born in the heart of the capital city in Nepal. I spent most of my childhood in Sunsari which lies in the eastern part of Nepal.',
     icon: <CakeIcon className="h-7 w-7 text-primary-normal" />,
   },
 
   {
     date: 'June, 2016',
     title: 'Completed High School',
-    description: 'I completed my high school in Kathmandu, Nepal',
+    description:
+      'I did my schooling in Itahari and Kathmandu. I completed my highschool from Kathmandu in 2016. After that, I started studying Bachelors in Computer Science in Tribuvan University in Nepal.',
     icon: <LibraryIcon className="h-7 w-7 text-primary-normal" />,
   },
-
   {
-    date: 'September, 2022',
+    date: 'September, 2020',
     title: 'Joined Leapfrog Technology',
-    description: 'I joined Leapfrog Technology as a Software Engineer',
+    description:
+      'In the midst of the COVID pandemic, I was offered an opportunity to join Leapfrog technology as an intern. Later, I was offered a job as a Software Engineer.',
     icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
   },
 
   {
     date: 'September 2022',
     title: 'Complete Undergraduate Studies',
-    description: 'I completed my undergraduate studies in Kathmandu, Nepal',
+    description: 'I completed my undergraduate studies in Kathmandu, Nepal.',
     icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
   },
 ];
@@ -49,8 +51,10 @@ const Timeline = () => {
               className="timeline__event w-[70vw] md:w-[50vw] animated fadeInUp delay-3s timeline__event--type1"
               key={item.date}
             >
-              <div className="timeline-icon-shadow p-[44px] md:m-10 md:rounded-full bg-normal flex align-center justify-center">
-                {item.icon}
+              <div className="md:flex items-center">
+                <div className="timeline-icon-shadow p-[44px] md:mx-10 md:rounded-full bg-normal flex align-center justify-center">
+                  {item.icon}
+                </div>
               </div>
 
               <div className="timeline__event__date text-md">{item.date}</div>
