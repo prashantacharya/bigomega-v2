@@ -25,8 +25,6 @@ const Blogs = (props: BlogPageProps) => {
 const BlogCard = (props: { post: any }) => {
   const { post } = props;
 
-  console.log(post);
-
   return (
     <li className="bg-section my-4 p-4 rounded">
       <Link href={`/blogs/${post.id}`}>
@@ -40,13 +38,13 @@ const BlogCard = (props: { post: any }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {
       allPostsData,
     },
   };
-}
+};
 
 export default Blogs;
