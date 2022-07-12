@@ -3,6 +3,7 @@ title: "Why did I create this website?"
 subtitle: "In this blog, I talk about why & how I created this website and how do I plan to take it further."
 date: '2019-05-10'
 keywords: "blog, personal blog, life, technical blog"
+thumbnail: "/blogs/about/about.png"
 ---
 
 If you know me well, you probably already know that I write blogs quite often. Most of the times the blogs I write are technical blogs, other contents I write are rare and occassional. Inspired by **Dan Abramov**, I wanted to create a personal blog website like he has. That is the primary motivation for creating this website.

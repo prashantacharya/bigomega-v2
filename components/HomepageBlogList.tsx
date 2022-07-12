@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { formattedBlogDate } from '../utils/date';
 
@@ -7,7 +8,6 @@ interface IHomePageBlogList {
 
 const HomePageBlogList = (props: IHomePageBlogList) => {
   const { blogs } = props;
-  console.log(blogs);
 
   return (
     <section className="bg-normal py-10">
@@ -22,16 +22,34 @@ const HomePageBlogList = (props: IHomePageBlogList) => {
               className="bg-normal dark:bg-section rounded-lg shadow-lg"
               key={blog.id}
             >
+              <div className="flex items-center justify-center">
+                {blog.thumbnail ? (
+                  <Image
+                    height="200"
+                    width="400"
+                    src={blog.thumbnail}
+                    alt={blog.title}
+                  />
+                ) : (
+                  <Image
+                    height="200"
+                    width="400"
+                    src="/blog-list-placeholder.png"
+                    alt=""
+                  />
+                )}
+              </div>
+
               <div className="p-4">
                 <Link href={`/blogs/${blog.id}`}>
-                  <h3 className="mb-4 text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
+                  <h3 className="text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
                     {blog.title}
                   </h3>
                 </Link>
-                <p className="text-sm text-secondary-normal font-semibold">
+                <p className="my-2 text-sm text-secondary-normal font-semibold">
                   {formattedBlogDate(blog.date)}
                 </p>
-                <p className="mt-4 dark:text-white">{blog?.subtitle}</p>
+                <p className="dark:text-white">{blog?.subtitle}</p>
               </div>
             </div>
           ))}
