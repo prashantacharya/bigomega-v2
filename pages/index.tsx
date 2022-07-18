@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection';
 import ThemeSwitch from '../components/ThemeSwitch';
 import HomePageBlogList from '../components/HomepageBlogList';
 import Technologies from '../components/Technologies';
+import SocialMedia from '../components/Socialmedia';
 
 const HomePage = (props: any) => {
   const { blogs } = props;
@@ -20,6 +21,8 @@ const HomePage = (props: any) => {
       <HomePageBlogList blogs={blogs} />
 
       <Technologies />
+
+      <SocialMedia />
 
       <div className="mt-10">
         <ThemeSwitch />
