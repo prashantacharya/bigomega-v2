@@ -73,6 +73,17 @@ const Technologies = () => {
             width={150}
           />
         </div>
+
+        <div className="text-center">
+          <a
+            rel="noreferrer"
+            className="text-secondary-normal ease-in-out duration-300 hover:text-secondary-darker hover:border-b border-secondary-darker pb-1"
+            target="_blank"
+            href="https://icons8.com"
+          >
+            icons by icons8
+          </a>
+        </div>
       </div>
     </section>
   );
