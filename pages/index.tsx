@@ -4,6 +4,7 @@ import { getSortedPostsData } from '../utils/posts';
 import HeroSection from '../components/HeroSection';
 import ThemeSwitch from '../components/ThemeSwitch';
 import HomePageBlogList from '../components/HomepageBlogList';
+import Technologies from '../components/Technologies';
 
 const HomePage = (props: any) => {
   const { blogs } = props;
@@ -17,6 +18,8 @@ const HomePage = (props: any) => {
       <Timeline />
 
       <HomePageBlogList blogs={blogs} />
+
+      <Technologies />
 
       <div className="mt-10">
         <ThemeSwitch />

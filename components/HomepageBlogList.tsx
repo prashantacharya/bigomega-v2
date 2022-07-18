@@ -11,7 +11,7 @@ const HomePageBlogList = (props: IHomePageBlogList) => {
 
   return (
     <section className="bg-normal py-10">
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold text-center text-primary-normal uppercase">
           Blogs
         </h2>
