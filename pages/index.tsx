@@ -12,8 +12,6 @@ const HomePage = (props: any) => {
 
   const homePageBlogs = blogs.slice(0, 3);
 
-  console.log(homePageBlogs);
-
   return (
     <div className="bg-normal">
       <Nav />
