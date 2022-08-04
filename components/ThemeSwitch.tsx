@@ -5,8 +5,6 @@ import { ThemeContext } from '../context/ThemeProvider';
 const ThemeSwitch = () => {
   const themeContext = useContext(ThemeContext);
 
-  console.log(themeContext);
-
   const switchTheme = () => {
     themeContext?.toggleTheme();
   };

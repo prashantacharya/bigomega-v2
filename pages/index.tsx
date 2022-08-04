@@ -2,7 +2,6 @@ import Nav from '../components/Nav';
 import Timeline from '../components/Timeline';
 import { getSortedPostsData } from '../utils/posts';
 import HeroSection from '../components/HeroSection';
-import ThemeSwitch from '../components/ThemeSwitch';
 import HomePageBlogList from '../components/HomepageBlogList';
 import Technologies from '../components/Technologies';
 import SocialMedia from '../components/Socialmedia';
@@ -10,6 +9,10 @@ import Footer from '../components/Footer';
 
 const HomePage = (props: any) => {
   const { blogs } = props;
+
+  const homePageBlogs = blogs.slice(0, 3);
+
+  console.log(homePageBlogs);
 
   return (
     <div className="bg-normal">
@@ -19,7 +22,7 @@ const HomePage = (props: any) => {
 
       <Timeline />
 
-      <HomePageBlogList blogs={blogs} />
+      <HomePageBlogList blogs={homePageBlogs} />
 
       <Technologies />
 

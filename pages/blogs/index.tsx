@@ -1,5 +1,7 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import Wrapper from '../../components/Wrapper';
+import { formattedBlogDate } from '../../utils/date';
 import { getSortedPostsData } from '../../utils/posts';
 
 interface BlogPageProps {
@@ -12,29 +14,54 @@ const Blogs = (props: BlogPageProps) => {
   return (
     <Wrapper>
       <article className="container mx-auto bg-normal">
-        <ul>
+        <div className="my-10 grid content-stretch gap-16 grid-cols-1 md:grid-cols-3">
           {allPostsData.map((post: any) => (
-            <BlogCard post={post} key={post.id} />
+            <BlogCard blog={post} key={post.id} />
           ))}
-        </ul>
+        </div>
       </article>
     </Wrapper>
   );
 };
 
-const BlogCard = (props: { post: any }) => {
-  const { post } = props;
+const BlogCard = (props: { blog: any }) => {
+  const { blog } = props;
 
   return (
-    <li className="bg-section my-4 p-4 rounded">
-      <Link href={`/blogs/${post.id}`}>
-        <a className="text-xl text-primary-normal hover:text-primary-darker">
-          {post.title}
-        </a>
-      </Link>
+    <div
+      className="bg-normal dark:bg-section rounded-lg shadow-lg"
+      key={blog.id}
+    >
+      <div className="flex items-center justify-center">
+        {blog.thumbnail ? (
+          <Image
+            height="200"
+            width="400"
+            src={blog.thumbnail}
+            alt={blog.title}
+          />
+        ) : (
+          <Image
+            height="200"
+            width="400"
+            src="/blog-list-placeholder.png"
+            alt=""
+          />
+        )}
+      </div>
 
-      <p className="text-gray dark:text-white">{post.subtitle}</p>
-    </li>
+      <div className="p-4">
+        <Link href={`/blogs/${blog.id}`}>
+          <h3 className="text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
+            {blog.title}
+          </h3>
+        </Link>
+        <p className="my-2 text-sm text-secondary-normal font-semibold">
+          {formattedBlogDate(blog.date)}
+        </p>
+        <p className="dark:text-white">{blog?.subtitle}</p>
+      </div>
+    </div>
   );
 };
 
