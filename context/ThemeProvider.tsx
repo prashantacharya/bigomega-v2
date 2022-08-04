@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from 'react';
 
 export const ThemeContext = createContext<null | {
   toggleTheme: () => void;
+  theme: string;
 }>(null);
 
 interface ThemeProviderProps {
@@ -34,7 +35,7 @@ const ThemeProvider = (props: ThemeProviderProps) => {
   const appTheme = theme === 'dark' ? 'theme-dark dark' : 'theme-default';
 
   return (
-    <ThemeContext.Provider value={{ toggleTheme }}>
+    <ThemeContext.Provider value={{ toggleTheme, theme }}>
       <div className={`${appTheme} bg-primary`}>{props.children}</div>
     </ThemeContext.Provider>
   );
