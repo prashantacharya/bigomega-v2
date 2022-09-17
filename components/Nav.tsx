@@ -15,7 +15,15 @@ const Nav = () => {
     <nav className="py-5 px-3">
       <div className="container mx-auto">
         <div className="flex justify-between">
-          <Image src="/logo.svg" height="55" width="200" alt="Big Omega" />
+          <Link href="/">
+            <Image
+              src="/logo.svg"
+              className="cursor-pointer"
+              height="55"
+              width="200"
+              alt="Big Omega"
+            />
+          </Link>
 
           <div className="flex justify-between items-center">
             <div className="mr-4 md:mr-10">

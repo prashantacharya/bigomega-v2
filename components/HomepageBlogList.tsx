@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import config from '../constants/config';
 import { formattedBlogDate } from '../utils/date';
 
 interface IHomePageBlogList {
@@ -41,11 +42,15 @@ const HomePageBlogList = (props: IHomePageBlogList) => {
               </div>
 
               <div className="p-4">
-                <Link href={`/blogs/${blog.id}`}>
+                <a
+                  href={`${config.BLOG_URL}${blog.id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <h3 className="text-xl text-primary-normal hover:text-primary-darker font-bold cursor-pointer">
                     {blog.title}
                   </h3>
-                </Link>
+                </a>
                 <p className="my-2 text-sm text-secondary-normal font-semibold">
                   {formattedBlogDate(blog.date)}
                 </p>
