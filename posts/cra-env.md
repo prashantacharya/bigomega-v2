@@ -3,6 +3,7 @@ title: "Hiding API keys in .env files with create-react-app"
 subtitle: "How to use environment variables from .env file using create-react-app"
 date: '2019-10-20'
 keywords: "react, CRA, environment variables, .env, API Keys"
+published: true
 ---
 
 When you have a project that uses API keys or any other private keys, and want to push it on GitHub, you might probably want to hide those details from any other people who see the code. That's when you have store the API key as environment variable on a `.env` file and add it on a `.gitignore` file on the root of the project. Lucky for you all, `create-react-app` is already configured with git and adds all the list of files and folders that should not be pushed onto GitHub or anything similar like gitlab or bitbucket.

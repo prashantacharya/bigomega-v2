@@ -23,7 +23,9 @@ export function getSortedPostsData() {
     };
   });
 
-  return allPostsData.sort((a: any, b: any) => {
+  const publishedPosts = allPostsData.filter((post: any) => post.published);
+
+  return publishedPosts.sort((a: any, b: any) => {
     if (a.date < b.date) {
       return 1;
     } else {

@@ -3,6 +3,7 @@ title: "Using the useState hook"
 subtitle: "In this blog, I talk about creating statefull functional components with hooks."
 date: '2019-05-25'
 keywords: "react, react-hooks, hooks, state, components, functional components, useState"
+published: true
 ---
 
 I tried react hooks and it's pretty awesome. With hooks, you can create functional components that can **store state**. It would not have been possible earlier. Hooks are a newer addition in the react library. They are included in the react 16.8 stable release.
