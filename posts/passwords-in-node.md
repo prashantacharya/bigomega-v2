@@ -3,6 +3,7 @@ title: 'Storing passwords the right way on a database with an example on Node.JS
 subtitle: 'Storing passwords and encrypting well is a challenge. So how to do it and do it well?'
 date: '2020-01-29'
 keywords: 'bcrypt, hashing, passwords, security, node.js, backend, database '
+published: true
 ---
 
 Storing a password is a challenge while designing applications. We have to do it well if we don't want to compromise the security of our applications and users. I would like to briefly explain the approaches we might consider while designing an authentication system that stores users' passwords but first, it's also really important to talk about the approaches we should never take.
