@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import Nav from '../components/Nav';
 import Timeline from '../components/Timeline';
 import { getSortedPostsData } from '../utils/posts';
@@ -14,6 +15,10 @@ const HomePage = (props: any) => {
 
   return (
     <div className="bg-normal">
+      <Head>
+        <title>Home - BigOmega</title>
+        <link rel="icon" href="/favicon.svg" />
+      </Head>
       <Nav />
 
       <HeroSection />

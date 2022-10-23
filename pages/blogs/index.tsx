@@ -1,5 +1,5 @@
+import Head from 'next/head';
 import Image from 'next/image';
-import Link from 'next/link';
 import Wrapper from '../../components/Wrapper';
 import config from '../../constants/config';
 import { formattedBlogDate } from '../../utils/date';
@@ -14,6 +14,9 @@ const Blogs = (props: BlogPageProps) => {
 
   return (
     <Wrapper>
+      <Head>
+        <title>Blogs - BigOmega</title>
+      </Head>
       <article className="container mx-auto bg-normal">
         <div className="my-10 grid content-stretch gap-16 grid-cols-1 md:grid-cols-3">
           {allPostsData.map((post: any) => (
