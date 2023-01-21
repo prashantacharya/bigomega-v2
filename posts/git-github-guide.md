@@ -3,6 +3,7 @@ title: 'A beginners guide to Git and Github'
 subtitle: 'Git and GitHub remains vital in software engineering. This blog aims to provide the basics of it.'
 date: '2020-01-25'
 keywords: 'git, github, version control, collaboration'
+published: true
 ---
 
 Git and GitHub are important for software engineers/developers. To understand Git and GitHub, we have to understand version control first.

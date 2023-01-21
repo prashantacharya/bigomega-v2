@@ -1,8 +1,9 @@
 ---
 title: "A minor error we make while creating a React's state"
-subtitle: "This blog explains about a silly error people make while doing a project in React"
-date: "2019-12-28"
-keywords: "React, JavaScript, React.js, state, hooks"
+subtitle: 'This blog explains about a silly error people make while doing a project in React'
+date: '2019-12-28'
+keywords: 'React, JavaScript, React.js, state, hooks'
+published: true
 ---
 
 A state in react doesn't have a type. A counter can hold a value of a number at an instance and it can be changed into something else like a string in another instance. Doing this causes no errors and there isn't one either.
@@ -11,25 +12,25 @@ Though this doesn't raise an error, an error might arise later unintentionally. 
 
 ```jsx
 const App = () => {
-  const [items, setItem] = useState("")
+  const [items, setItem] = useState('');
 
   useEffect(() => {
     /*
      * Make an API call
      * Set the new state to be the response from API call
      */
-  }, [])
+  }, []);
 
   return (
     <div>
       <ul>
-        {items.map(item => (
+        {items.map((item) => (
           <li>{item.name}</li>
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 ```
 
 For simplicity, I have created a dummy data that I might get as a response from an API. In order to simulate the feel of a real API responding to an AJAX request, I have created a setTimeout that resolves after 3 seconds.
@@ -38,27 +39,27 @@ For simplicity, I have created a dummy data that I might get as a response from 
 const dummyData = [
   {
     id: 1,
-    name: "Smith",
+    name: 'Smith',
   },
   {
     id: 2,
-    name: "Dan",
+    name: 'Dan',
   },
   {
     id: 3,
-    name: "Prashant",
+    name: 'Prashant',
   },
-]
+];
 
 useEffect(() => {
-  setTimeout(() => setItems(dummyData), 3000)
-}, [])
+  setTimeout(() => setItems(dummyData), 3000);
+}, []);
 ```
 
 On the surface, this code looks normal but it's not. The problem lies here
 
 ```js
-const [items, setItem] = useState("")
+const [items, setItem] = useState('');
 ```
 
 I have initially assigned items to be an empty string. Now if we see the return statement, I have mapped over items (which I expect to be an array). The value of items is an array only after the network request is resolved and the items is set to the new value we get from the API.
@@ -67,12 +68,12 @@ I have initially assigned items to be an empty string. Now if we see the return 
 return (
   <div>
     <ul>
-      {items.map(item => (
+      {items.map((item) => (
         <li>{item.name}</li>
       ))}
     </ul>
   </div>
-)
+);
 ```
 
 Initially when `items = ''`, `items.map` fails to execute because map method doesn't exist on a string.
@@ -82,8 +83,9 @@ Initially when `items = ''`, `items.map` fails to execute because map method doe
 So you could do something like this
 
 ```js
-const [items, setItem] = useState([])
+const [items, setItem] = useState([]);
 ```
+
 Just a minor change from `''` to `[]` would save me hours of random google searches and scratching my head.
 
 I hope you like the blog. If it was worth your time then please consider subscribing to not miss future updates.

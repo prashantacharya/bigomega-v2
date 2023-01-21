@@ -3,6 +3,7 @@ title: 'Async Await in JavaScript'
 subtitle: 'Async Await makes working with promises easier and fun.'
 date: '2020-02-15'
 keywords: 'asynchronous, async-await, promises, javascript, node, react, fetch'
+published: true
 ---
 
 This blog is a follow up from my last blog in which I talked about promises. If you are unfamiliar with promises in JavaScript, please read <a href='https://bigomega.dev/promises' target='_blank'>that article</a> before reading this one. Also, some familiarity with exception handling would be useful.
@@ -29,10 +30,10 @@ To consume the promise, we did the following
 
 ```js
 fetch()
-	.then(data => JSON.parse(data))
-	.then(res => console.log(res))
-	.catch(err => JSON.parse(err))
-	.then(errorMsg => console.log(errorMsg))
+  .then((data) => JSON.parse(data))
+  .then((res) => console.log(res))
+  .catch((err) => JSON.parse(err))
+  .then((errorMsg) => console.log(errorMsg));
 ```
 
 This is the part where we can use async-await to make our code look better. To consume the promise, we have to use an async function which we can describe as follows:
@@ -45,19 +46,19 @@ Inside an `async` function, we can use the `await` keyword to wait for the promi
 
 ```js
 async function fetchData() {
-	/*
-	 * here the fetch function returns a promise
-	 * we have to await the promise to get resolved here
-	 */
-	const data = await fetch()
-	// once the data is fetched, we can do anything we want
-	// lets parse the JSON string to a JS object and
-	// log it onto the console
-	const res = JSON.parse(data)
-	console.log(res)
+  /*
+   * here the fetch function returns a promise
+   * we have to await the promise to get resolved here
+   */
+  const data = await fetch();
+  // once the data is fetched, we can do anything we want
+  // lets parse the JSON string to a JS object and
+  // log it onto the console
+  const res = JSON.parse(data);
+  console.log(res);
 }
 
-fetchData()
+fetchData();
 ```
 
 The above code will print the following onto the console
@@ -70,17 +71,17 @@ If we revisit the promise, we know that the promise might get resolved or might 
 
 ```js
 async function fetchData() {
-	try {
-		const data = await fetch(false)
-		const res = JSON.parse(data)
-		console.log(res)
-	} catch (error) {
-		const errorObject = JSON.parse(error)
-		console.log(errorObject)
-	}
+  try {
+    const data = await fetch(false);
+    const res = JSON.parse(data);
+    console.log(res);
+  } catch (error) {
+    const errorObject = JSON.parse(error);
+    console.log(errorObject);
+  }
 }
 
-fetchData()
+fetchData();
 ```
 
 I have intentionally passed false value as an argument to the fetch function to make the promise reject. Anything passed to the reject function will be received by the catch block as an exception. We can reference the rejected error on the `error` argument we have passed to the catch block. The above code logs the following onto the console.

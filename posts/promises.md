@@ -3,6 +3,7 @@ title: 'Promises in JavaScript'
 subtitle: 'Promise is an awesome feature that exists on JavaScript. This blog covers how promises can be implemented on our applications'
 date: '2020-02-11'
 keywords: 'asynchronous, async-await, promises, javascript, node, react, fetch'
+published: true
 ---
 
 Promises in JavaScript behave similarly to promises we make normally to people. It's something like **you'll get great score if submit your assignments on time.** In this example, if the student submits his assignments on time, the promise made to him gets fulfilled else, it will not. In JavaScript, promises let us handle tasks that might happen in the future. This concept is really important while doing tasks like making **network requests**, as we're not certain if the request gets resolved or not.
@@ -14,7 +15,7 @@ Promises were released in ES2015 to minimize the callbacky code we used to write
 To use a promise, we have to create a promise object that takes in a callback function with 2 arguments: **resolve** and **reject**.
 
 ```js
-let myPromise = new Promise((resolve, reject) => {})
+let myPromise = new Promise((resolve, reject) => {});
 ```
 
 ### Resolve
@@ -23,10 +24,10 @@ If the **promise is fulfilled**, **resolve gets called**.
 
 ```js
 let myPromise = new Promise((resolve, reject) => {
-	let condition = true
+  let condition = true;
 
-	if (condition) resolve('Promise is resolved.')
-})
+  if (condition) resolve('Promise is resolved.');
+});
 ```
 
 Here, if the value of the condition is true, we resolve the promise. The promise returns the thing inside the resolve function if it gets resolved.
@@ -37,11 +38,11 @@ If the **promise is not fulfilled**, **reject gets called**.
 
 ```js
 let myPromise = new Promise((resolve, reject) => {
-	let condition = true
+  let condition = true;
 
-	if (condition) resolve('Promise is resolved.')
-	else reject('Promise is rejected.')
-})
+  if (condition) resolve('Promise is resolved.');
+  else reject('Promise is rejected.');
+});
 ```
 
 We have successfully created a promise object that resolves if the condition is true and rejects if the condition is false. You can modify the use case as you want but this is the basic concept with which you can create promises.
@@ -57,7 +58,7 @@ We can use a series of `.then`s to use a promise, **if it's resolved**.
 Let's see how we'd use the `myPromise` promise object we defined above.
 
 ```js
-myPromise.then(data => console.log(data))
+myPromise.then((data) => console.log(data));
 ```
 
 This would output the following on the console
@@ -70,16 +71,16 @@ If the promise is rejected, we have to use a catch to handle promise. To make th
 
 ```js
 myPromise
-	.then(data => {
-		// This function only gets called if
-		// the promise is resolved
-		console.log(data)
-	})
-	.catch(err => {
-		// This function gets called if
-		// the promise is rejected
-		console.log(err)
-	})
+  .then((data) => {
+    // This function only gets called if
+    // the promise is resolved
+    console.log(data);
+  })
+  .catch((err) => {
+    // This function gets called if
+    // the promise is rejected
+    console.log(err);
+  });
 ```
 
 After running the following program, we'll get the following output on the shell.
@@ -96,8 +97,8 @@ The fetch API in JavaScript is a recent addition to JavaScript that allows us to
 
 ```js
 fetch('https://jsonplaceholder.typicode.com/todos/1')
-	.then(response => response.json())
-	.then(json => console.log(json))
+  .then((response) => response.json())
+  .then((json) => console.log(json));
 ```
 
 Here, the `fetch` requests for data on the URL. The data we receive might not be in a JSON format, therefore we change it to be a JSON on the first _then_ call. The JSON response after we convert the string is passed as `json` variable on the second _then_, which is printed on the console after that.
@@ -133,10 +134,10 @@ To use this function that returns a promise, we can do the following
 
 ```js
 fetch()
-	.then(data => JSON.parse(data))
-	.then(res => console.log(res))
-	.catch(err => JSON.parse(err))
-	.then(errorMsg => console.log(errorMsg))
+  .then((data) => JSON.parse(data))
+  .then((res) => console.log(res))
+  .catch((err) => JSON.parse(err))
+  .then((errorMsg) => console.log(errorMsg));
 ```
 
 Here, we have a default argument `requestPassed` which is a boolean. If it is set to `true` or even `false`, we return a JSON string. We have to parse the string to JavaScript objects so that we can use that properly on our application. Therefore, on the first `.then` call, we parse the string to represent it in an object format.

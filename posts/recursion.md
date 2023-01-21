@@ -1,8 +1,9 @@
 ---
-title: "Recursion"
-subtitle: "This blog explains what recursion is with an example on javascript"
-date: "2019-09-04"
-keywords: "Python, JavaScript, Recursion, Fibonacci Series"
+title: 'Recursion'
+subtitle: 'This blog explains what recursion is with an example on javascript'
+date: '2019-09-04'
+keywords: 'Python, JavaScript, Recursion, Fibonacci Series'
+published: true
 ---
 
 Most of the people find recursion difficult but it's not. Students find difficulty in learning it because of the examples that teachers and online tutorials aim to provide. So in this blog, we are going to talk about recursion with a very basic example of recursion using JavaScript. Recursion is a concept so it is language independent. If you know how to define and call a function in a language that you are using then you can pretty much go along and understand everything that I want to cover in the blog.
@@ -21,7 +22,7 @@ The first thing that we want to do when the function start executing is to print
 
 ```js
 function countDownFrom(n) {
-  console.log(n) // highlight-line
+  console.log(n); // highlight-line
 }
 ```
 
@@ -35,10 +36,10 @@ The base case is the case when the function stops calling itself and returns som
 
 ```js
 function countDownFrom(n) {
-  console.log(n)
+  console.log(n);
 
   // highlight-start
-  if (n == 1) return
+  if (n == 1) return;
   // highlight-end
 }
 ```
@@ -49,19 +50,19 @@ The recursive case is the case in which the function keeps calling itself until 
 
 ```js
 function countDownFrom(n) {
-  console.log(n)
+  console.log(n);
 
-  if (n == 1) return
+  if (n == 1) return;
   // highlight-start
   // reduce the value of n by 1
   // and call the function again
   // with the new value of n
-  else countDownFrom(--n)
+  else countDownFrom(--n);
   // highlight-end
 }
 
 // calling the function here.
-countDownFrom(3)
+countDownFrom(3);
 ```
 
 The function call at the else statement simply decreases the value of n and calls the function itself as explained in the comments in the code block.
@@ -76,14 +77,14 @@ If you look at the code the else statement is absolutely unnecessary because if 
 
 ```js
 function countDownFrom(n) {
-  console.log(n)
+  console.log(n);
 
-  if (n == 1) return
+  if (n == 1) return;
 
-  countDownFrom(--n)
+  countDownFrom(--n);
 }
 
-countDownFrom(5)
+countDownFrom(5);
 ```
 
 ## Conclusion

@@ -3,6 +3,7 @@ title: 'Simple Markdown Parser with JavaScript and Regular Expressions'
 subtitle: 'By the completion of this blog, you will have a function that takes in a markdown text and return a HTML text.'
 date: '2020-08-21'
 keywords: 'Regular Expression, JavaScript, Markdown, Compiler, Parser, RegEx'
+published: true
 ---
 
 Markdown is a markup language like HTML. It is quite popular among developers to write blogs, readme files, documentation and blogs. Some of the popular websites that support rich text like Reddit, GitHub, Notion etc allow you to write markdown. I use markdown to convert my blog from a markdown file to HTML web pages. Markdown is simple yet very powerful. In this blog, I will be writing about how to build a simple markdown parser to convert md to HTML with JavaScript using Regular Expressions.
@@ -32,9 +33,9 @@ Different languages have different ways to represent RegEx. Here is how it is do
 
 ```js
 // Validates all the text that includes the text Hello (case sensitive)
-const pattern = /Hello/
-const text = 'Hello, beautiful people'
-pattern.test(text) // Returns true
+const pattern = /Hello/;
+const text = 'Hello, beautiful people';
+pattern.test(text); // Returns true
 ```
 
 I will explain the patterns we use in our parser as we reach that section. However, if you want to read more about regular expressions, visit [https://javascript.info](https://javascript.info/regular-expressions).
@@ -45,9 +46,9 @@ The markdown parser I intend to build is a function that takes markdown text as 
 
 ```js
 function parseMarkdown(markdownText) {
-	const htmlText = markdownText // do something to this markdown text
+  const htmlText = markdownText; // do something to this markdown text
 
-	return htmlText
+  return htmlText;
 }
 ```
 
@@ -60,9 +61,9 @@ Our markdown parser is simple. It captures a pattern from markdown string passed
 Here is how the string replace function works.
 
 ```js
-text = 'hello world and hello everyone'
-regEx = /Hello/gi
-console.log(text.replace(regEx, 'hi'))
+text = 'hello world and hello everyone';
+regEx = /Hello/gi;
+console.log(text.replace(regEx, 'hi'));
 // prints: 'hi world and hi everyone'
 ```
 
@@ -73,10 +74,10 @@ console.log(text.replace(regEx, 'hi'))
 Regular Expressions allows us to capture patterns of text and reference them with something like an index. We can use the index in the replace operation. To represent a group, we can simply wrap it in a parenthesis `()`.
 
 ```js
-text = 'hello world and hello everyone'
+text = 'hello world and hello everyone';
 // RegEx to match a string starting with hello followed by anything
-regEx = /(Hello).*/i
-console.log(text.replace(regEx, 'Matched Group: $1'))
+regEx = /(Hello).*/i;
+console.log(text.replace(regEx, 'Matched Group: $1'));
 // prints: 'Matched Group: hello'
 ```
 
@@ -92,7 +93,7 @@ Here are the RegExes we will use in our parser and their explanation.
    For heading, we want a string that starts with a hash(es) and captures everything after those characters.
 
    ```js
-   const h3 = /^### (.*$)/gim
+   const h3 = /^### (.*$)/gim;
    ```
 
    > Here the first carat `^` represents line starting with and m flag represents multiple lines and by doing .\* we are capturing everything (letters, numbers, special characters) that exists there.
@@ -101,7 +102,7 @@ Here are the RegExes we will use in our parser and their explanation.
    For blockquote, we want a line that starts with `>` and captures everything after that character.
 
    ```js
-   const bq = /^\> (.*$)/gim
+   const bq = /^\> (.*$)/gim;
    ```
 
    > Note: \\> represents escaping > character. That means, don't treat > as a part of special regEx character but as a part of that text itself.
@@ -110,23 +111,23 @@ Here are the RegExes we will use in our parser and their explanation.
    For bold text, we want to capture a text between 2 asterisks.
 
    ```js
-   const bold = /\*\*(.*)\*\*/gim
+   const bold = /\*\*(.*)\*\*/gim;
    ```
 
 4. **Italics Text** <br />
    For italic text, we want to capture a text between one asterisk.
 
    ```js
-   const italics = /\*(.*)\*/gim
+   const italics = /\*(.*)\*/gim;
    ```
 
 5. **For image, link and line break** <br />
    ```js
    // ![Alt text](url)
-   const image = /!\[(.*?)\]\((.*?)\)/gim
+   const image = /!\[(.*?)\]\((.*?)\)/gim;
    // [text](url)
-   const link = /\[(.*?)\]\((.*?)\)/gim
-   const lineBreak = /\n$/gim
+   const link = /\[(.*?)\]\((.*?)\)/gim;
+   const lineBreak = /\n$/gim;
    ```
 
 ### Fitting it all together
@@ -135,18 +136,18 @@ By this point, you probably have all the background necessary to understand the 
 
 ```js
 function parseMarkdown(markdownText) {
-	const htmlText = markdownText
-		.replace(/^### (.*$)/gim, '<h3>$1</h3>')
-		.replace(/^## (.*$)/gim, '<h2>$1</h2>')
-		.replace(/^# (.*$)/gim, '<h1>$1</h1>')
-		.replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-		.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
-		.replace(/\*(.*)\*/gim, '<i>$1</i>')
-		.replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
-		.replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
-		.replace(/\n$/gim, '<br />')
+  const htmlText = markdownText
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+    .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+    .replace(/\*(.*)\*/gim, '<i>$1</i>')
+    .replace(/!\[(.*?)\]\((.*?)\)/gim, "<img alt='$1' src='$2' />")
+    .replace(/\[(.*?)\]\((.*?)\)/gim, "<a href='$2'>$1</a>")
+    .replace(/\n$/gim, '<br />');
 
-	return htmlText.trim()
+  return htmlText.trim();
 }
 ```
 
@@ -156,9 +157,9 @@ Time to test the parser.
 const text = `
 # Hello World
 **This is a bold text**
-`
+`;
 
-console.log(parseMarkdown(text))
+console.log(parseMarkdown(text));
 ```
 
 Should print:
