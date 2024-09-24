@@ -23,16 +23,29 @@ const data = [
   },
   {
     date: 'September, 2020',
-    title: 'Joined Leapfrog Technology',
+    title: 'Worked at Leapfrog Technology',
     description:
       'In the midst of the COVID pandemic, I was offered an opportunity to join Leapfrog technology as an intern. Later, I was offered a job as a Software Engineer.',
     icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
   },
-
   {
-    date: 'September 2022',
+    date: 'September, 2022',
     title: 'Complete Undergraduate Studies',
     description: 'I completed my undergraduate studies in Kathmandu, Nepal.',
+    icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
+  },
+  {
+    date: 'March, 2023',
+    title: 'Joined Optible AI',
+    description:
+      'I joined Optible AI where I worked as a software engineer and built cool projects on top of AI.',
+    icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
+  },
+  {
+    date: 'August, 2024',
+    title: 'Joined Graduate School',
+    description:
+      'I joined Miami University at Oxford, Ohio to pursue my masters degree in Computer Science.',
     icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
   },
 ];
