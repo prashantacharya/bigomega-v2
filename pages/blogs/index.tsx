@@ -1,16 +1,20 @@
+import { z } from 'zod';
 import Head from 'next/head';
 import Image from 'next/image';
-import Wrapper from '../../components/Wrapper';
 import config from '../../constants/config';
-import { formattedBlogDate } from '../../utils/date';
+import { getAllPosts } from '../../lib/client';
+import Wrapper from '../../components/Wrapper';
 import { getSortedPostsData } from '../../utils/posts';
+import { AllPostsDataSchema, PostSchema } from '../../lib/schema';
+import { formattedBlogDate } from '../../utils/date';
 
 interface BlogPageProps {
   allPostsData: any;
+  hashNodePosts: z.infer<typeof AllPostsDataSchema>;
 }
 
 const Blogs = (props: BlogPageProps) => {
-  const { allPostsData } = props;
+  const { hashNodePosts } = props;
 
   return (
     <Wrapper>
@@ -19,8 +23,12 @@ const Blogs = (props: BlogPageProps) => {
       </Head>
       <article className="container mx-auto bg-normal">
         <div className="my-10 grid content-stretch gap-16 grid-cols-1 md:grid-cols-3">
-          {allPostsData.map((post: any) => (
+          {/*allPostsData.map((post: any) => (
             <BlogCard blog={post} key={post.id} />
+          )) */}
+
+          {hashNodePosts.publication.posts.edges.map((post) => (
+            <BlogCard blog={post.node} key={post.node.slug} />
           ))}
         </div>
       </article>
@@ -28,20 +36,20 @@ const Blogs = (props: BlogPageProps) => {
   );
 };
 
-const BlogCard = (props: { blog: any }) => {
+const BlogCard = (props: { blog: z.infer<typeof PostSchema> }) => {
   const { blog } = props;
 
   return (
     <div
       className="bg-normal dark:bg-section rounded-lg shadow-lg"
-      key={blog.id}
+      key={blog.slug}
     >
       <div className="flex items-center justify-center">
-        {blog.thumbnail ? (
+        {blog.coverImage && blog?.coverImage?.url ? (
           <Image
             height="200"
             width="400"
-            src={blog.thumbnail}
+            src={blog.coverImage.url}
             alt={blog.title}
           />
         ) : (
@@ -56,7 +64,7 @@ const BlogCard = (props: { blog: any }) => {
 
       <div className="p-4">
         <a
-          href={`${config.BLOG_URL}${blog.id}`}
+          href={`${config.BLOG_URL}/${blog.slug}`}
           target="_blank"
           rel="noreferrer"
         >
@@ -65,9 +73,8 @@ const BlogCard = (props: { blog: any }) => {
           </h3>
         </a>
         <p className="my-2 text-sm text-secondary-normal font-semibold">
-          {formattedBlogDate(blog.date)}
+          {formattedBlogDate(blog.publishedAt)}
         </p>
-        <p className="dark:text-white">{blog?.subtitle}</p>
       </div>
     </div>
   );
@@ -75,9 +82,12 @@ const BlogCard = (props: { blog: any }) => {
 
 export const getStaticProps = async () => {
   const allPostsData = getSortedPostsData();
+  const hashNodePosts = await getAllPosts();
+
   return {
     props: {
       allPostsData,
+      hashNodePosts: hashNodePosts,
     },
   };
 };
