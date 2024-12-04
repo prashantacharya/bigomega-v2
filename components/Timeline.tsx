@@ -10,7 +10,7 @@ const data = [
     date: 'March, 1998',
     title: 'Born in Kathmandu, Nepal',
     description:
-      'I was born in the heart of the capital city in Nepal. I spent most of my childhood in Sunsari which lies in the eastern part of Nepal.',
+      'I was born in Kathmandu, the capital city of Nepal. I spent most of my childhood in Sunsari which lies in the eastern part of Nepal.',
     icon: <CakeIcon className="h-7 w-7 text-primary-normal" />,
   },
 
@@ -47,6 +47,13 @@ const data = [
     description:
       'I joined Miami University at Oxford, Ohio to pursue my masters degree in Computer Science.',
     icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
+  },
+  {
+    date: 'August, 2024',
+    title: 'Started working as a Research Assistant',
+    description:
+      'I started working as a Research Assistant at Miami University under the guidance of Dr. James Walden.',
+    icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
   },
 ];
 

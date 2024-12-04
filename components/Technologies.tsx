@@ -1,5 +1,7 @@
 import Image from 'next/image';
+import GoLogo from '../public/technologies/go.svg';
 import NodeLogo from '../public/technologies/node.svg';
+import FigmaLogo from '../public/technologies/figma.svg';
 import ReactLogo from '../public/technologies/react.svg';
 import PythonLogo from '../public/technologies/python.svg';
 import NextJsLogo from '../public/technologies/next-js.svg';
@@ -12,7 +14,7 @@ const Technologies = () => {
     <section className="bg-section py-10">
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold text-center text-primary-normal uppercase">
-          Technologies
+          Technologies I Work With
         </h2>
 
         <div className="my-16 flex flex-wrap gap-8 md:gap-16 justify-center align-center">
@@ -69,6 +71,16 @@ const Technologies = () => {
             src={PythonLogo}
             alt="Python"
             title="Python"
+            height={150}
+            width={150}
+          />
+
+          <Image src={GoLogo} alt="Go" title="Go" height={150} width={150} />
+
+          <Image
+            src={FigmaLogo}
+            alt="Figma"
+            title="Figma"
             height={150}
             width={150}
           />
