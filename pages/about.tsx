@@ -7,7 +7,7 @@ const About = () => {
         <h1 className="text-3xl text-primary-normal font-bold uppercase">
           About Me
         </h1>
-        <div className="min-h-[70vh] w-[50%] mx-auto">
+        <div className="min-h-[70vh] w-[50%] mx-auto dark:text-white">
           <p className="py-10">
             I am a graduate student in Computer Science at Miami University with
             over 4 years of experience in software engineering. My expertise

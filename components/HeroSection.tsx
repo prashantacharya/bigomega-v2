@@ -23,8 +23,8 @@ const HeroSection = () => {
               className="w-[119px] mt-2 relative inline-block px-4 py-2 font-medium group"
             >
               <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-primary-normal group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-              <span className="absolute inset-0 w-full h-full bg-white border-2 border-primary-normal group-hover:bg-primary-normal"></span>
-              <span className="relative text-primary-normal group-hover:text-white">
+              <span className="absolute inset-0 w-full h-full bg-white dark:bg-primary-normal  border-2 border-primary-normal group-hover:bg-primary-normal"></span>
+              <span className="relative text-primary-normal group-hover:text-white dark:text-white">
                 Read More
               </span>
             </button>
