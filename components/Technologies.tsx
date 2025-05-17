@@ -8,8 +8,41 @@ import NextJsLogo from '../public/technologies/next-js.svg';
 import TailwindLogo from '../public/technologies/tailwindcss.svg';
 import JavaScriptLogo from '../public/technologies/javascript.svg';
 import PostgreSQLLogo from '../public/technologies/postgresql.svg';
+import { motion } from 'framer-motion';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
+};
 
 const Technologies = () => {
+  const logos = [
+    { src: JavaScriptLogo, alt: 'JavaScript', title: 'JavaScript' },
+    { src: NodeLogo, alt: 'Node.js', title: 'Node.JS' },
+    { src: PostgreSQLLogo, alt: 'PostgreSQL', title: 'PostgreSQL' },
+    { src: ReactLogo, alt: 'React.js', title: 'React.JS' },
+    {
+      src: NextJsLogo,
+      alt: 'Next.js',
+      title: 'Next.JS',
+      className: 'filter dark:invert',
+    },
+    { src: TailwindLogo, alt: 'tailwindcss', title: 'tailwindcss' },
+    { src: PythonLogo, alt: 'Python', title: 'Python' },
+    { src: GoLogo, alt: 'Go', title: 'Go' },
+    { src: FigmaLogo, alt: 'Figma', title: 'Figma' },
+  ];
+
   return (
     <section className="bg-section py-10">
       <div className="container mx-auto px-4">
@@ -17,81 +50,33 @@ const Technologies = () => {
           Technologies I Work With
         </h2>
 
-        <div className="my-16 flex flex-wrap gap-8 md:gap-16 justify-center align-center">
-          <Image
-            src={JavaScriptLogo}
-            alt="JavaScript"
-            title="JavaScript"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            src={NodeLogo}
-            alt="Node.js"
-            title="Node.JS"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            src={PostgreSQLLogo}
-            alt="PostgreSQL"
-            title="PostgreSQL"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            src={ReactLogo}
-            alt="Node.js"
-            title="React.JS"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            className="filter dark:invert"
-            src={NextJsLogo}
-            alt="Next.js"
-            title="Next.JS"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            src={TailwindLogo}
-            alt="tailwindcss"
-            title="tailwindcss"
-            height={150}
-            width={150}
-          />
-
-          <Image
-            src={PythonLogo}
-            alt="Python"
-            title="Python"
-            height={150}
-            width={150}
-          />
-
-          <Image src={GoLogo} alt="Go" title="Go" height={150} width={150} />
-
-          <Image
-            src={FigmaLogo}
-            alt="Figma"
-            title="Figma"
-            height={150}
-            width={150}
-          />
-        </div>
+        <motion.div
+          className="my-16 flex flex-wrap gap-8 md:gap-16 justify-center align-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
+          {logos.map((logo, index) => (
+            <motion.div key={index} variants={itemVariants}>
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                title={logo.title}
+                height={150}
+                width={150}
+                className={logo.className}
+              />
+            </motion.div>
+          ))}
+        </motion.div>
 
         <div className="text-center">
           <a
             rel="noreferrer"
             className="text-secondary-normal ease-in-out duration-300 hover:text-secondary-darker hover:border-b border-secondary-darker pb-1"
             target="_blank"
-            href="https://icons8.com"
+            href="https:icons8.com"
           >
             icons by icons8
           </a>

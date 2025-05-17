@@ -4,6 +4,7 @@ import {
   LibraryIcon,
   OfficeBuildingIcon,
 } from '@heroicons/react/solid';
+import { motion } from 'framer-motion'; // Import motion
 
 const data = [
   {
@@ -57,6 +58,12 @@ const data = [
   },
 ];
 
+// Animation variants for a fade-in and slide-up effect
+const timelineItemVariants = {
+  hidden: { opacity: 0, y: 50 }, // Start invisible and 50px down
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }, // Fade in and move to original position
+};
+
 const Timeline = () => {
   return (
     <section className="bg-section py-10">
@@ -65,11 +72,19 @@ const Timeline = () => {
           My Life&apos;s Timeline
         </h2>
 
+        {/* You can optionally wrap the entire timeline in a motion div if you want the title to also animate */}
+        {/* <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}> */}
+
         <div className="timeline">
-          {data.map((item) => (
-            <div
-              className="timeline__event w-[70vw] md:w-[50vw] animated fadeInUp delay-3s timeline__event--type1"
+          {data.map((item, index) => (
+            <motion.div // Wrap each timeline event with motion.div
+              className="timeline__event w-[70vw] md:w-[50vw] timeline__event--type1" // Removed existing animation classes
               key={item.date}
+              variants={timelineItemVariants} // Apply the animation variants
+              initial="hidden" // Set initial state
+              whileInView="visible" // Animate when in view
+              viewport={{ once: true, amount: 0.5 }} // Trigger when 50% is visible, only once
+              transition={{ delay: index * 0.1 }} // Stagger delay based on index
             >
               <div className="md:flex items-center">
                 <div className="timeline-icon-shadow p-[44px] md:mx-10 md:rounded-full bg-normal flex align-center justify-center">
@@ -86,9 +101,10 @@ const Timeline = () => {
                   <p>{item.description}</p>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
+        {/* </motion.div> */}
       </div>
     </section>
   );
