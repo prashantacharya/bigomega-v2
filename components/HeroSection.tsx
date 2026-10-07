@@ -173,11 +173,11 @@ const HeroSection = ({ revealed, nameInFlight }: HeroSectionProps) => {
             variants={item}
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
           >
-            A software engineer and Computer Science grad student. I research{' '}
-            <span className="text-ink">large language models</span>,{' '}
-            <span className="text-ink">software engineering</span> and{' '}
-            <span className="text-ink">security</span>, after four years of
-            shipping products with JavaScript, Python and Go.
+            I&apos;m curious about how things work, how they can be built
+            better, and what happens when we push technology into new
+            territory. My work sits somewhere between building software,
+            exploring AI, and figuring out interesting problems. I share that
+            journey through the things I build, write, and create.
           </motion.p>
 
           <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">

@@ -14,7 +14,7 @@ const lines = [
 
 const COMMAND = 'whoami';
 const TYPE_MS = 90;
-const LINE_MS = 1150;
+const LINE_MS = 2000;
 const NAME_REVEAL_MS = 900;
 const START_LINES_MS = COMMAND.length * TYPE_MS + 450;
 // When the name starts sweeping in; the intro then waits for "Proceed".
