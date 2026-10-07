@@ -1,6 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, type Variants } from 'framer-motion';
+import type { PointerEvent } from 'react';
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  type Variants,
+} from 'framer-motion';
 import { ArrowRightIcon } from '@heroicons/react/outline';
 import { NAME_CLASSES, NAME_LAYOUT_ID } from './IntroSplash';
 
@@ -32,8 +40,39 @@ const HeroSection = ({ revealed, nameInFlight }: HeroSectionProps) => {
   // so the foreground layer only joins in once the name has landed.
   const contentParallax = revealed && !nameInFlight;
 
+  // Pointer parallax on top of the scroll one: each background layer drifts
+  // toward the mouse by its own amount. It lives on inner elements because the
+  // scroll animation already owns the transform of .hero-glow and .hero-glyph.
+  const reduceMotion = useReducedMotion();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const spring = { stiffness: 60, damping: 20 };
+  const x = useSpring(pointerX, spring);
+  const y = useSpring(pointerY, spring);
+  const glowX = useTransform(x, [-1, 1], [-12, 12]);
+  const glowY = useTransform(y, [-1, 1], [-12, 12]);
+  const glyphX = useTransform(x, [-1, 1], [-28, 28]);
+  const glyphY = useTransform(y, [-1, 1], [-28, 28]);
+  const glyphRotate = useTransform(x, [-1, 1], [-3, 3]);
+
+  // Mouse only: touch has no hover, so a tap would just jolt the layers.
+  const onPointerMove = (e: PointerEvent<HTMLElement>) => {
+    if (!revealed || reduceMotion || e.pointerType !== 'mouse') return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerX.set(((e.clientX - rect.left) / rect.width) * 2 - 1);
+    pointerY.set(((e.clientY - rect.top) / rect.height) * 2 - 1);
+  };
+  const onPointerLeave = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
   return (
-    <section className="hero relative">
+    <section
+      className="hero relative"
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+    >
       {/* Background layers. Clipped horizontally only, so nothing causes
           sideways scroll; they fade out as they move instead of being cut off
           (a mask over moving layers would force a repaint every frame). */}
@@ -44,18 +83,32 @@ const HeroSection = ({ revealed, nameInFlight }: HeroSectionProps) => {
         {/* Radial gradients instead of blur filters: same soft glow, no
             expensive filter to recompute. */}
         <div className="hero-glow absolute inset-0">
-          <div className="absolute -left-56 -top-20 h-[36rem] w-[36rem] bg-[radial-gradient(closest-side,var(--theme-primary),transparent)] opacity-[0.16] dark:opacity-[0.22]" />
-          <div className="absolute -right-48 top-24 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,var(--theme-secondary),transparent)] opacity-[0.18] dark:opacity-[0.14]" />
+          <motion.div
+            className="absolute inset-0"
+            style={{ x: glowX, y: glowY }}
+          >
+            <div className="absolute -left-56 -top-20 h-[36rem] w-[36rem] bg-[radial-gradient(closest-side,var(--theme-primary),transparent)] opacity-[0.16] dark:opacity-[0.22]" />
+            <div className="absolute -right-48 top-24 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,var(--theme-secondary),transparent)] opacity-[0.18] dark:opacity-[0.14]" />
+            <div className="absolute right-[10%] top-8 h-[24rem] w-[24rem] bg-[radial-gradient(closest-side,color-mix(in_srgb,var(--theme-primary),var(--theme-secondary)),transparent)] opacity-[0.12]" />
+          </motion.div>
         </div>
         <div className="hero-glyph absolute -right-24 -top-8 select-none sm:right-[-4rem] lg:right-[calc(50%-36rem)]">
-          <motion.span
-            className="block text-[22rem] font-semibold leading-none text-transparent [-webkit-text-stroke:1.5px_var(--line)] sm:text-[30rem]"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: revealed ? 1 : 0 }}
-            transition={{ duration: 1.2, delay: 0.4 }}
-          >
-            Ω
-          </motion.span>
+          <motion.div style={{ x: glyphX, y: glyphY, rotate: glyphRotate }}>
+            <motion.span
+              className="relative block text-[26rem] font-semibold leading-none sm:text-[36rem]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: revealed ? 1 : 0 }}
+              transition={{ duration: 1.2, delay: 0.4 }}
+            >
+              {/* Soft gradient fill under a crisp outline */}
+              <span className="text-gradient absolute inset-0 opacity-[0.12] dark:opacity-[0.18]">
+                Ω
+              </span>
+              <span className="relative text-transparent [-webkit-text-stroke:1.5px_var(--line)]">
+                Ω
+              </span>
+            </motion.span>
+          </motion.div>
         </div>
       </div>
 

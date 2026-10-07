@@ -225,7 +225,7 @@ body {
     opacity: 0;
   }
   100% {
-    transform: translateY(140px);
+    transform: translateY(260px) scale(1.1);
   }
 }
 
@@ -235,7 +235,7 @@ body {
     opacity: 0;
   }
   100% {
-    transform: translateY(240px) rotate(14deg);
+    transform: translateY(420px) rotate(28deg) scale(1.15);
   }
 }
 
@@ -245,6 +245,6 @@ body {
     opacity: 0;
   }
   100% {
-    transform: translateY(-80px);
+    transform: translateY(-120px);
   }
 }
