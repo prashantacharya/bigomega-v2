@@ -12,7 +12,7 @@ const About = () => {
       <div className="container pt-16 sm:pt-24">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
-            About <span className="text-gradient">me</span>
+            About me
           </h1>
           <div className="bg-gradient-brand w-fit rounded-2xl p-[2px]">
             <Image

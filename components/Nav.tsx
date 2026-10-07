@@ -15,7 +15,7 @@ const Nav = () => {
           href="/"
           className="group flex items-center gap-2 font-semibold tracking-tight"
         >
-          <span className="bg-gradient-brand grid h-7 w-7 place-items-center rounded-lg text-sm text-white transition-transform group-hover:rotate-[-8deg]">
+          <span className="text-gradient inline-block text-3xl leading-none transition-transform group-hover:rotate-[-8deg]">
             Ω
           </span>
           <span className="hidden sm:inline">BigOmega</span>
