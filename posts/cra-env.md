@@ -1,8 +1,8 @@
 ---
-title: "Hiding API keys in .env files with create-react-app"
-subtitle: "How to use environment variables from .env file using create-react-app"
+title: 'How to use .env in a React app using Create React App?'
+subtitle: 'How to use environment variables from .env file using create-react-app'
 date: '2019-10-20'
-keywords: "react, CRA, environment variables, .env, API Keys"
+keywords: 'react, CRA, environment variables, .env, API Keys'
 published: true
 ---
 

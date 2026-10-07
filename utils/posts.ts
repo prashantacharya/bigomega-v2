@@ -18,7 +18,8 @@ export function getSortedPostsData() {
 
     return {
       id,
-      content: micromark(matterResult.content),
+      // Posts are authored locally, so their inline HTML (links, <br>) is trusted.
+      content: micromark(matterResult.content, { allowDangerousHtml: true }),
       ...matterResult.data,
     };
   });

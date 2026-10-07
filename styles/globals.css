@@ -1,54 +1,250 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
-@import url('./nav.css');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Brand colours are shared across themes; surfaces and text flip. */
 :root {
   --theme-primary: hsl(354, 100%, 67%);
-  --theme-secondary: hsl(37, 100%, 60%);
   --theme-primary-darker: hsl(354, 79%, 57%);
+  --theme-secondary: hsl(37, 100%, 60%);
   --theme-secondary-darker: hsl(37, 100%, 50%);
+
+  --background: hsl(30, 33%, 99%);
+  --surface: hsl(20, 60%, 97%);
+  --ink: hsl(240, 10%, 10%);
+  --muted: hsl(240, 5%, 42%);
+  --line: hsl(240, 6%, 90%);
+
+  color-scheme: light;
 }
 
-.theme-default {
-  --background: hsl(0, 0%, 100%);
-  --section-background: hsl(0, 100%, 98%);
+.dark {
+  --background: hsl(195, 46%, 5%);
+  --surface: hsl(200, 30%, 9%);
+  --ink: hsl(30, 20%, 94%);
+  --muted: hsl(210, 8%, 62%);
+  --line: hsl(200, 18%, 16%);
+
+  color-scheme: dark;
+}
+
+html {
+  background: var(--background);
+  color: var(--ink);
+  /* Always reserve the scrollbar's space, so locking scroll during the intro
+     (which hides the scrollbar) doesn't shift the page sideways. */
+  scrollbar-gutter: stable;
+}
+
+/* While the intro plays, paint the reserved scrollbar strip to match it. */
+html[data-intro] {
+  background: hsl(195, 46%, 5%);
+}
+
+body {
+  background: var(--background);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: hsl(354 100% 67% / 0.25);
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(100deg, var(--theme-secondary) 0%, var(--theme-primary) 70%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, var(--theme-secondary) 0%, var(--theme-primary) 100%);
+  }
+}
+
+/* Long-form blog content rendered from markdown */
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.prose > * + * {
+  margin-top: 1.25em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  margin-top: 2.25em;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+}
+
+.prose a {
+  color: var(--theme-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+
+.prose a:hover {
+  color: var(--theme-primary-darker);
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--theme-primary);
+  padding-left: 1.25em;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5em;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.4em;
+}
+
+.prose li::marker {
+  color: var(--theme-primary);
+}
+
+.prose code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.875em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.15em 0.4em;
+}
+
+.prose pre {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.25em;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.prose pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+.prose img {
+  border-radius: 12px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prose hr {
+  border-color: var(--line);
+  margin: 3em 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.prose th,
+.prose td {
+  border-bottom: 1px solid var(--line);
+  padding: 0.6em 0.75em;
+  text-align: left;
 }
 
 /*
-.theme-dark {
-  --background: hsl(195, 6.9%, 11.4%);
-  --section-background: hsl(208.2, 39.5%, 16.9%);
-}
-*/
+ * Hero parallax. CSS scroll-driven animations run on the compositor in step
+ * with scrolling, so the layers can't lag behind the page the way a
+ * JavaScript scroll listener can. The timeline runs while the hero scrolls out
+ * of view (exit 0% → 100%). Browsers without support, and visitors who prefer
+ * reduced motion, get a static hero.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .hero {
+      view-timeline-name: --hero;
+    }
 
-.theme-dark {
-  --background: hsl(195, 46%, 5%);
-  --section-background: hsl(210, 80%, 12%);
+    .hero-glow,
+    .hero-glyph,
+    .hero-content {
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: --hero;
+      animation-range: exit 0% exit 100%;
+    }
+
+    /* Layers further back move less, so they read as further away. */
+    .hero-glow {
+      animation-name: hero-glow;
+    }
+
+    .hero-glyph {
+      animation-name: hero-glyph;
+    }
+
+    .hero-content {
+      animation-name: hero-content;
+    }
+  }
 }
 
-.title-name {
-  background: linear-gradient(180deg, #fca311 0%, #eb5160 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@keyframes hero-glow {
+  90%,
+  100% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(140px);
+  }
 }
 
-.theme-default main {
-  background: url('/hero-light-background.svg');
+@keyframes hero-glyph {
+  90%,
+  100% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(240px) rotate(14deg);
+  }
 }
 
-.theme-dark main {
-  background: url('/hero-dark-background.svg');
-}
-
-.theme-default main,
-.theme-dark main {
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.hero-image-bg {
-  background: linear-gradient(180deg, #fca311 0%, #eb5160 100%);
+@keyframes hero-content {
+  85%,
+  100% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(-80px);
+  }
 }

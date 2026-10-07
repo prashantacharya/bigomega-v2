@@ -1,112 +1,65 @@
-import {
-  AcademicCapIcon,
-  CakeIcon,
-  LibraryIcon,
-  OfficeBuildingIcon,
-} from '@heroicons/react/solid';
-import { motion } from 'framer-motion'; // Import motion
+import Section from './Section';
 
+// Most recent first.
 const data = [
   {
-    date: 'March, 1998',
-    title: 'Born in Kathmandu, Nepal',
+    date: 'Aug 2024',
+    title: 'Research Assistant, Miami University',
     description:
-      'I was born in Kathmandu, the capital city of Nepal. I spent most of my childhood in Sunsari which lies in the eastern part of Nepal.',
-    icon: <CakeIcon className="h-7 w-7 text-primary-normal" />,
-  },
-
-  {
-    date: 'June, 2016',
-    title: 'Completed High School',
-    description:
-      'I did my schooling in Itahari and Kathmandu. I completed my highschool from Kathmandu in 2016. After that, I started studying Bachelors in Computer Science in Tribuvan University in Nepal.',
-    icon: <LibraryIcon className="h-7 w-7 text-primary-normal" />,
+      'Researching LLMs, software engineering and cybersecurity under the guidance of Dr. James Walden.',
   },
   {
-    date: 'September, 2020',
-    title: 'Worked at Leapfrog Technology',
+    date: 'Aug 2024',
+    title: 'Started grad school',
     description:
-      'In the midst of the COVID pandemic, I was offered an opportunity to join Leapfrog technology as an intern. Later, I was offered a job as a Software Engineer.',
-    icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
+      'Joined Miami University in Oxford, Ohio for a master’s in Computer Science.',
   },
   {
-    date: 'September, 2022',
-    title: 'Complete Undergraduate Studies',
-    description: 'I completed my undergraduate studies in Kathmandu, Nepal.',
-    icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
+    date: 'Mar 2023',
+    title: 'Software Engineer, Optible AI',
+    description:
+      'Led a team building an AI-driven grant analysis app and moved a monolith to microservices.',
   },
   {
-    date: 'March, 2023',
-    title: 'Joined Optible AI',
+    date: 'Sep 2022',
+    title: 'Finished undergrad',
     description:
-      'I joined Optible AI where I worked as a software engineer and built cool projects on top of AI.',
-    icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
+      'Graduated in Computer Science and Information Technology from Tribhuvan University.',
   },
   {
-    date: 'August, 2024',
-    title: 'Joined Graduate School',
+    date: 'Sep 2020',
+    title: 'Software Engineer, Leapfrog Technology',
     description:
-      'I joined Miami University at Oxford, Ohio to pursue my masters degree in Computer Science.',
-    icon: <AcademicCapIcon className="h-7 w-7 text-primary-normal" />,
+      'Joined as an intern mid-pandemic and stayed on as an engineer, building software US pharmacies used to deliver COVID vaccines.',
   },
   {
-    date: 'August, 2024',
-    title: 'Started working as a Research Assistant',
-    description:
-      'I started working as a Research Assistant at Miami University under the guidance of Dr. James Walden.',
-    icon: <OfficeBuildingIcon className="h-7 w-7 text-primary-normal" />,
+    date: 'Mar 1998',
+    title: 'Born in Kathmandu',
+    description: 'Grew up mostly in Sunsari, in the east of Nepal.',
   },
 ];
 
-// Animation variants for a fade-in and slide-up effect
-const timelineItemVariants = {
-  hidden: { opacity: 0, y: 50 }, // Start invisible and 50px down
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }, // Fade in and move to original position
-};
-
 const Timeline = () => {
   return (
-    <section className="bg-section py-10">
-      <div className="container mx-auto">
-        <h2 className="text-2xl font-bold text-center text-primary-normal uppercase">
-          My Life&apos;s Timeline
-        </h2>
-
-        {/* You can optionally wrap the entire timeline in a motion div if you want the title to also animate */}
-        {/* <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }}> */}
-
-        <div className="timeline">
-          {data.map((item, index) => (
-            <motion.div // Wrap each timeline event with motion.div
-              className="timeline__event w-[70vw] md:w-[50vw] timeline__event--type1" // Removed existing animation classes
-              key={item.date}
-              variants={timelineItemVariants} // Apply the animation variants
-              initial="hidden" // Set initial state
-              whileInView="visible" // Animate when in view
-              viewport={{ once: true, amount: 0.5 }} // Trigger when 50% is visible, only once
-              transition={{ delay: index * 0.1 }} // Stagger delay based on index
-            >
-              <div className="md:flex items-center">
-                <div className="timeline-icon-shadow p-[44px] md:mx-10 md:rounded-full bg-normal flex align-center justify-center">
-                  {item.icon}
-                </div>
-              </div>
-
-              <div className="timeline__event__date text-md">{item.date}</div>
-              <div className="timeline__event__content bg-normal dark:text-white">
-                <div className="timeline__event__title text-sm md:text-xl">
-                  {item.title}
-                </div>
-                <div className="timeline__event__description">
-                  <p>{item.description}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        {/* </motion.div> */}
-      </div>
-    </section>
+    <Section title="Journey">
+      <ol className="relative border-l border-line">
+        {data.map((item) => (
+          <li
+            key={item.title}
+            className="group relative pb-9 pl-6 last:pb-0 sm:grid sm:grid-cols-[6.5rem_1fr] sm:gap-6 sm:pl-8"
+          >
+            <span className="absolute -left-[5px] top-[7px] h-[9px] w-[9px] rounded-full border-2 border-[var(--background)] bg-line transition-colors group-hover:bg-primary-normal group-first:bg-primary-normal" />
+            <p className="font-mono text-xs leading-6 text-muted">{item.date}</p>
+            <div>
+              <h3 className="font-medium">{item.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed text-muted">
+                {item.description}
+              </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </Section>
   );
 };
 

@@ -1,12 +1,15 @@
+import SocialMedia from './Socialmedia';
+
 const Footer = () => {
   return (
-    <section className="bg-section py-10">
-      <div className="container mx-auto px-4">
-        <p className="text-center text-primary-normal">
-          All rights reserved to Prashant Acharya
+    <footer className="mt-24 border-t border-line">
+      <div className="container flex flex-col-reverse items-center justify-between gap-4 py-8 sm:flex-row">
+        <p className="text-sm text-muted">
+          © {new Date().getFullYear()} Prashant Acharya
         </p>
+        <SocialMedia className="-mr-2" />
       </div>
-    </section>
+    </footer>
   );
 };
 

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useSyncExternalStore } from 'react';
 
 export const ThemeContext = createContext<null | {
   toggleTheme: () => void;
@@ -6,37 +6,39 @@ export const ThemeContext = createContext<null | {
 }>(null);
 
 interface ThemeProviderProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
+// The `dark` class on <html> is the source of truth. pages/_document sets it
+// before first paint from localStorage or the system preference, so the page
+// background (including overscroll) follows the theme with no flash.
+const listeners = new Set<() => void>();
+
+const subscribe = (listener: () => void) => {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+};
+
+const getSnapshot = () =>
+  document.documentElement.classList.contains('dark') ? 'dark' : 'default';
+
+const getServerSnapshot = () => 'default';
+
 const ThemeProvider = (props: ThemeProviderProps) => {
-  const [theme, setTheme] = useState<string>('default');
+  const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    const value = localStorage.getItem('theme');
-
-    if (value) setTheme(value);
+  const toggleTheme = useCallback(() => {
+    const next = getSnapshot() === 'dark' ? 'default' : 'dark';
+    document.documentElement.classList.toggle('dark', next === 'dark');
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+    listeners.forEach((listener) => listener());
   }, []);
-
-  const saveTheme = (theme: string) => {
-    localStorage.setItem('theme', theme);
-  };
-
-  const setAppTheme = (theme: string) => {
-    setTheme(theme);
-    saveTheme(theme);
-  };
-
-  const toggleTheme = () => {
-    if (theme === 'dark') setAppTheme('default');
-    if (theme === 'default') setAppTheme('dark');
-  };
-
-  const appTheme = theme === 'dark' ? 'theme-dark dark' : 'theme-default';
 
   return (
     <ThemeContext.Provider value={{ toggleTheme, theme }}>
-      <div className={`${appTheme} bg-primary`}>{props.children}</div>
+      {props.children}
     </ThemeContext.Provider>
   );
 };

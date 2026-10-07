@@ -1,88 +1,144 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { motion } from 'framer-motion'; // Import motion
+import Link from 'next/link';
+import { motion, type Variants } from 'framer-motion';
+import { ArrowRightIcon } from '@heroicons/react/outline';
+import { NAME_CLASSES, NAME_LAYOUT_ID } from './IntroSplash';
 
-const HeroSection = () => {
-  const router = useRouter();
+const container: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.35 } },
+};
 
-  // Animation variants for stagger effect
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2, // Delay between children animations
-      },
-    },
-  };
+const item: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+};
 
-  // Animation variants for individual elements (text, image, button)
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 }, // Start slightly below and hidden
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }, // Fade in and move to original position
-  };
+interface HeroSectionProps {
+  // false while the intro is still playing over the page
+  revealed: boolean;
+  // true while the name is flying in from the intro, so it stays on top
+  nameInFlight: boolean;
+}
 
-  const imageVariants = {
-    hidden: { opacity: 0, x: 20 }, // Start slightly to the side and hidden
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }, // Fade in and move to original position
-  };
+const HeroSection = ({ revealed, nameInFlight }: HeroSectionProps) => {
+  // The parallax itself is CSS scroll-driven animation (see .hero-* in
+  // globals.css), so it runs on the compositor in step with scrolling.
+  // Moving the content would trap the flying name below the intro curtain,
+  // so the foreground layer only joins in once the name has landed.
+  const contentParallax = revealed && !nameInFlight;
 
   return (
-    <main className="px-3 py-10 md:py-20">
-      <motion.div // Wrap the main content div with motion
-        className="container mx-auto py-20"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
+    <section className="hero relative">
+      {/* Background layers. Clipped horizontally only, so nothing causes
+          sideways scroll; they fade out as they move instead of being cut off
+          (a mask over moving layers would force a repaint every frame). */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-x-clip"
       >
-        <div className="flex flex-col-reverse md:flex-row justify-between align-center">
-          <div className="text-center md:text-left md:flex flex-col justify-center">
-            <motion.h1 // Apply motion to the h1
-              className="text-center md:text-left title-name text-left text-5xl font-semibold uppercase"
-              variants={itemVariants} // Use itemVariants
-            >
-              Prashant <br />
-              Acharya
-            </motion.h1>
+        {/* Radial gradients instead of blur filters: same soft glow, no
+            expensive filter to recompute. */}
+        <div className="hero-glow absolute inset-0">
+          <div className="absolute -left-56 -top-20 h-[36rem] w-[36rem] bg-[radial-gradient(closest-side,var(--theme-primary),transparent)] opacity-[0.16] dark:opacity-[0.22]" />
+          <div className="absolute -right-48 top-24 h-[40rem] w-[40rem] bg-[radial-gradient(closest-side,var(--theme-secondary),transparent)] opacity-[0.18] dark:opacity-[0.14]" />
+        </div>
+        <div className="hero-glyph absolute -right-24 -top-8 select-none sm:right-[-4rem] lg:right-[calc(50%-36rem)]">
+          <motion.span
+            className="block text-[22rem] font-semibold leading-none text-transparent [-webkit-text-stroke:1.5px_var(--line)] sm:text-[30rem]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: revealed ? 1 : 0 }}
+            transition={{ duration: 1.2, delay: 0.4 }}
+          >
+            Ω
+          </motion.span>
+        </div>
+      </div>
 
-            <motion.p // Apply motion to the p
-              className="text-2xl mt-5 w-full dark:text-white"
-              variants={itemVariants} // Use itemVariants
-            >
-              I build applications using JavaScript, Python and Go.
-            </motion.p>
-
-            <motion.button // Apply motion to the button
-              onClick={() => router.push('/about')}
-              className="w-[119px] mt-2 relative inline-block px-4 py-2 font-medium group"
-              variants={itemVariants} // Use itemVariants
-            >
-              {/* Your button spans remain the same */}
-              <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-primary-normal group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
-              <span className="absolute inset-0 w-full h-full bg-white dark:bg-primary-normal border-2 border-primary-normal group-hover:bg-primary-normal"></span>
-              <span className="relative text-primary-normal group-hover:text-white dark:text-white">
-                Read More
-              </span>
-            </motion.button>
-          </div>
-
-          <div className="flex align-center justify-center">
-            <motion.div // Apply motion to the image wrapper div
-              className="w-1/2 md:w-auto md:text-left p-1 my-10 md:my-0 flex content-center align-center rounded-full hero-image-bg"
-              variants={imageVariants} // Use imageVariants
-            >
+      <div
+        className={`container relative pb-20 pt-16 sm:pt-24 ${
+          contentParallax ? 'hero-content' : ''
+        }`}
+      >
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate={revealed ? 'visible' : 'hidden'}
+        >
+          <motion.div variants={item} className="mb-8 flex items-center gap-4">
+            <div className="bg-gradient-brand rounded-full p-[2px]">
               <Image
                 src="/my-image.png"
-                height="400"
-                width="400"
-                className="rounded-full text-center"
+                width={64}
+                height={64}
+                className="rounded-full border-2 border-[var(--background)]"
                 alt="Prashant Acharya"
+                preload
               />
-            </motion.div>
-          </div>
-        </div>
-      </motion.div>
-    </main>
+            </div>
+            <p className="inline-flex items-center gap-2 rounded-full border border-line px-3 py-1 text-xs text-muted">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary-normal opacity-60" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-primary-normal" />
+              </span>
+              Research Assistant · Miami University
+            </p>
+          </motion.div>
+
+          <motion.p
+            variants={item}
+            className="mb-2 font-mono text-sm text-muted"
+          >
+            hi, I&apos;m
+          </motion.p>
+        </motion.div>
+
+        {revealed ? (
+          <motion.h1
+            layoutId={NAME_LAYOUT_ID}
+            className={`${NAME_CLASSES} relative ${nameInFlight ? 'z-[60]' : ''}`}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+          >
+            Prashant Acharya
+          </motion.h1>
+        ) : (
+          <h1 className={`${NAME_CLASSES} invisible`}>Prashant Acharya</h1>
+        )}
+
+        <motion.div
+          variants={container}
+          initial="hidden"
+          animate={revealed ? 'visible' : 'hidden'}
+        >
+          <motion.p
+            variants={item}
+            className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
+          >
+            A software engineer and Computer Science grad student. I research{' '}
+            <span className="text-ink">large language models</span>,{' '}
+            <span className="text-ink">software engineering</span> and{' '}
+            <span className="text-ink">security</span>, after four years of
+            shipping products with JavaScript, Python and Go.
+          </motion.p>
+
+          <motion.div variants={item} className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/about"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary-normal px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary-darker"
+            >
+              More about me
+              <ArrowRightIcon className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 

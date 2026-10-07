@@ -22,7 +22,7 @@ The first thing that we want to do when the function start executing is to print
 
 ```js
 function countDownFrom(n) {
-  console.log(n); // highlight-line
+  console.log(n) // highlight-line
 }
 ```
 
@@ -36,10 +36,10 @@ The base case is the case when the function stops calling itself and returns som
 
 ```js
 function countDownFrom(n) {
-  console.log(n);
+  console.log(n)
 
   // highlight-start
-  if (n == 1) return;
+  if (n == 1) return
   // highlight-end
 }
 ```
@@ -50,26 +50,26 @@ The recursive case is the case in which the function keeps calling itself until 
 
 ```js
 function countDownFrom(n) {
-  console.log(n);
+  console.log(n)
 
-  if (n == 1) return;
+  if (n == 1) return
   // highlight-start
   // reduce the value of n by 1
   // and call the function again
   // with the new value of n
-  else countDownFrom(--n);
+  else countDownFrom(--n)
   // highlight-end
 }
 
 // calling the function here.
-countDownFrom(3);
+countDownFrom(3)
 ```
 
 The function call at the else statement simply decreases the value of n and calls the function itself as explained in the comments in the code block.
 
 The image below explains what's going on.
 
-![Recursion](images/Recursion.png)
+![Recursion](/blogs/recursion/Recursion.png)
 
 ## Refactoring
 
@@ -77,14 +77,14 @@ If you look at the code the else statement is absolutely unnecessary because if 
 
 ```js
 function countDownFrom(n) {
-  console.log(n);
+  console.log(n)
 
-  if (n == 1) return;
+  if (n == 1) return
 
-  countDownFrom(--n);
+  countDownFrom(--n)
 }
 
-countDownFrom(5);
+countDownFrom(5)
 ```
 
 ## Conclusion
