@@ -70,6 +70,7 @@ body {
   font-size: 1.0625rem;
   line-height: 1.8;
   color: var(--ink);
+  overflow-wrap: break-word;
 }
 
 .prose > * + * {
@@ -162,6 +163,17 @@ body {
   border-radius: 12px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Embedded iframes (carbon.now.sh code snippets, YouTube) carry a fixed
+ * width="700" that would otherwise overflow narrow screens. */
+.prose iframe {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
 }
 
 .prose hr {
